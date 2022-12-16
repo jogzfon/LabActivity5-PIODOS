@@ -1,8 +1,6 @@
 package LeapYear;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LeapYearGUI extends JFrame{
     private JPanel panel1;
@@ -18,15 +16,19 @@ public class LeapYearGUI extends JFrame{
         app.setTitle("Leap Year Checker");
 
         app.btnCheckYear.addActionListener(e -> {
-            if(app.btnCheckYear.isEnabled()){
-                String userInput = app.tfYear.getText();
-                int year = Integer.parseInt(userInput);
-                if(((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0)){
-                    JOptionPane.showMessageDialog(new JFrame(),"Leap year");
+            try {
+                if(app.btnCheckYear.isEnabled()){
+                    String userInput = app.tfYear.getText();
+                    int year = Integer.parseInt(userInput);
+                    if(((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0)){
+                        JOptionPane.showMessageDialog(new JFrame(),"Leap year");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(new JFrame(),"Not a leap year");
+                    }
                 }
-                else{
-                    JOptionPane.showMessageDialog(new JFrame(),"Not a leap year");
-                }
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(new JFrame(),ex);
             }
         });
     }
