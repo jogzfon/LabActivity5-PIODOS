@@ -35,46 +35,56 @@ public class FoodOrderGUI extends JFrame{
 
         app.btnOrder.addActionListener(e -> {
             if(app.btnOrder.isEnabled()){
-                int orders = 0;
-                if(app.cPizza.isSelected()){
-                    orders += 100;
-                }
-                if(app.cBurger.isSelected()){
-                    orders += 80;
-                }
-                if(app.cFries.isSelected()){
-                    orders += 65;
-                }
-                if(app.cSoftDrinks.isSelected()){
-                    orders += 55;
-                }
-                if(app.cTea.isSelected()){
-                    orders += 50;
-                }
-                if(app.cSundae.isSelected()){
-                    orders += 40;
-                }
-                float total;
-                float deducted;
-                //Checks Discount Selected
-                if(discount.isSelected(app.rbNone.getModel())){
-                    total = orders;
-                    JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
-                }
-                if(discount.isSelected(app.rb5.getModel())){
-                    deducted = orders * 0.05f;
-                    total = orders-deducted;
-                    JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
-                }
-                if(discount.isSelected(app.rb10.getModel())){
-                    deducted = orders * 0.10f;
-                    total = orders-deducted;
-                    JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
-                }
-                if(discount.isSelected(app.rb15.getModel())){
-                    deducted = orders * 0.15f;
-                    total = orders-deducted;
-                    JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
+                try{
+                    int orders = 0;
+                    if(app.cPizza.isSelected()){
+                        orders += 100;
+                    }
+                    if(app.cBurger.isSelected()){
+                        orders += 80;
+                    }
+                    if(app.cFries.isSelected()){
+                        orders += 65;
+                    }
+                    if(app.cSoftDrinks.isSelected()){
+                        orders += 55;
+                    }
+                    if(app.cTea.isSelected()){
+                        orders += 50;
+                    }
+                    if(app.cSundae.isSelected()){
+                        orders += 40;
+                    }
+                    if(orders == 0){
+                        throw new Exception("Please pick an order");
+                    }
+                    float total;
+                    float deducted;
+                    //Checks Discount Selected
+                    if(discount.isSelected(app.rbNone.getModel())){
+                        total = orders;
+                        JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
+                    }
+                    else if(discount.isSelected(app.rb5.getModel())){
+                        deducted = orders * 0.05f;
+                        total = orders-deducted;
+                        JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
+                    }
+                    else if(discount.isSelected(app.rb10.getModel())){
+                        deducted = orders * 0.10f;
+                        total = orders-deducted;
+                        JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
+                    }
+                    else if(discount.isSelected(app.rb15.getModel())){
+                        deducted = orders * 0.15f;
+                        total = orders-deducted;
+                        JOptionPane.showMessageDialog(new JFrame(),"The total price is Php "+df.format(total));
+                    }
+                    else{
+                        throw new Exception("Pick a discount");
+                    }
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(new JFrame(),ex);
                 }
             }
         });
