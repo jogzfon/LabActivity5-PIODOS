@@ -2,9 +2,6 @@ package SimpleCalc;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SimpleCalcGUI extends JFrame{
     private JPanel panel1;
@@ -33,31 +30,35 @@ public class SimpleCalcGUI extends JFrame{
         app.lblResult.setHorizontalAlignment(JTextField.CENTER);
         app.btnCompute.addActionListener(e -> {
             if(app.btnCompute.isEnabled()){
-                String num1 = app.tfNumber1.getText();
-                String num2 = app.tfNumber2.getText();
+                try{
+                    String num1 = app.tfNumber1.getText();
+                    String num2 = app.tfNumber2.getText();
 
-                int numerous1 = Integer.parseInt(num1);
-                int numerous2 = Integer.parseInt(num2);
+                    int numerous1 = Integer.parseInt(num1);
+                    int numerous2 = Integer.parseInt(num2);
 
-                String operation = app.cbOperations.getSelectedItem().toString();
-                int total;
-                switch (operation){
-                    case "*":
-                        total = numerous1 * numerous2;
-                        app.lblResult.setText(Integer.toString(total));
-                        break;
-                    case "-":
-                        total = numerous1 - numerous2;
-                        app.lblResult.setText(Integer.toString(total));
-                        break;
-                    case "/":
-                        total = numerous1 / numerous2;
-                        app.lblResult.setText(Integer.toString(total));
-                        break;
-                    case "+":
-                        total = numerous1 + numerous2;
-                        app.lblResult.setText(Integer.toString(total));
-                        break;
+                    String operation = app.cbOperations.getSelectedItem().toString();
+                    int total;
+                    switch (operation){
+                        case "*":
+                            total = numerous1 * numerous2;
+                            app.lblResult.setText(Integer.toString(total));
+                            break;
+                        case "-":
+                            total = numerous1 - numerous2;
+                            app.lblResult.setText(Integer.toString(total));
+                            break;
+                        case "/":
+                            total = numerous1 / numerous2;
+                            app.lblResult.setText(Integer.toString(total));
+                            break;
+                        case "+":
+                            total = numerous1 + numerous2;
+                            app.lblResult.setText(Integer.toString(total));
+                            break;
+                    }
+                }catch (NullPointerException | NumberFormatException ex){
+                    JOptionPane.showMessageDialog(new JFrame(),ex);
                 }
             }
         });
